@@ -706,8 +706,8 @@
       '<label>시험/평가 방식</label><select id="crs-r-exam"><option>중간+기말</option><option>팀플 위주</option><option>출석+과제</option><option>퀴즈 위주</option><option>기타</option></select>' +
       '<label>태그 선택 (최대 3개)</label><div class="crs-tagpick" id="crs-tagpick">' + tagHtml + '</div>' +
       '<label>한줄 후기</label>' +
-      '<textarea id="crs-r-comment" rows="2" maxlength="100" placeholder="예: 과제는 많지만 배우는 게 확실히 많아요"></textarea>' +
-      '<div class="crs-hint" id="crs-r-count">0/100자</div>' +
+      '<textarea id="crs-r-comment" rows="3" placeholder="예: 과제는 많지만 배우는 게 확실히 많아요"></textarea>' +
+      '<div class="crs-hint" id="crs-r-count">0자</div>' +
       '<div class="crs-guideline"><strong>작성 가이드</strong><ul>' +
       '<li>수업 방식, 과제, 시험에 대한 내용만 적어주세요.</li>' +
       '<li>욕설이나 비속어, 인신공격성 표현은 삭제될 수 있어요.</li>' +
@@ -742,16 +742,11 @@
 
     const commentIn = document.getElementById('crs-r-comment');
     commentIn.addEventListener('input', () => {
-      document.getElementById('crs-r-count').textContent = commentIn.value.length + '/100자';
+      document.getElementById('crs-r-count').textContent = commentIn.value.length + '자';
     });
 
     return {
       validate(errEl) {
-        if (commentIn.value.trim().length > 100) {
-          errEl.textContent = '한줄 후기는 100자 이내로 작성해주세요.';
-          errEl.style.display = 'block';
-          return false;
-        }
         return true;
       },
       getData() {
